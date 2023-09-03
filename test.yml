@@ -2,8 +2,8 @@
 - hosts: all
   become: true
   tasks:
-    - name: Pull Flask app  image
-       docker_image:
-        name: varavkoyv/new
-        tag: latest
-        state: present 
+  - name: Pull Flask app  image
+    docker_image:
+      name: varavkoyv/new
+      tag: latest
+      state: present 

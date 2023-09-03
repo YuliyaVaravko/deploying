@@ -48,4 +48,4 @@
         name: docker
 
     - name: Pull default Docker image
-      command: docker pull varavkoyv/new -u varavkoyv -p dckr_pat_1ec_MrbpkTiEH_fFRtXjQvkhaco
+      command: docker pull varavkoyv/new:latest

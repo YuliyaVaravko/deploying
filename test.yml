@@ -18,13 +18,14 @@
   - name: 222
     pip:
       name: docker
-  - name: Log into private registry and force re-authorization
-    docker_login:
-      registry: docker.io/varavkoyv/new
-      username: varavkoyv
-      password: dckr_pat_1ec_MrbpkTiEH_fFRtXjQvkhaco
-  - name: Pull Flask app  image
-    docker_image:
-      name: varavkoyv/new
-      tag: latest
-      state: present 
+
+
+  - name: start an image which is NOT present on the host yet but on the private regisrty
+    docker:
+      name: docker_pull_test
+      registry: "varavkoyv/new"
+      username: "varavkoyv"
+      password: "dckr_pat_1ec_MrbpkTiEH_fFRtXjQvkhaco"
+      image: varavko/new:latest
+      state: present    
+

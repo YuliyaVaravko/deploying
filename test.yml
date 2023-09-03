@@ -2,6 +2,14 @@
 - hosts: all
   become: true
   tasks:
+  - name: install docker
+    apt:
+      update_cache: yes
+      state: latest
+      name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
   - name: Log into private registry and force re-authorization
     docker_login:
       registry: docker.io/varavkoyv/new

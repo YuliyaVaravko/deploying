@@ -2,14 +2,11 @@
 - hosts: all
   become: true
   tasks:
-##### setup ansible <---> docker
-
   - apt:
-      update_cache: yes
-      state: latest
-      name: python3-pip
-
-- pip:
+    update_cache: yes
+    state: latest
+    name: python3-pip
+  - pip:
     name: docker
   - name: Pull Flask app  image
     docker_image:

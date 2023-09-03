@@ -2,12 +2,14 @@
 - hosts: all
   become: true
   tasks:
-  - apt:
-    update_cache: yes
-    state: latest
-    name: python3-pip
-  - pip:
-    name: docker
+  - name: 111
+    apt:
+      update_cache: yes
+      state: latest
+      name: python3-pip
+  - name: 222
+    pip:
+      name: docker
   - name: Pull Flask app  image
     docker_image:
       name: varavkoyv/new

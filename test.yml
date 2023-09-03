@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: true
+  tasks:
+# Installing modules
+    - name: Install Apache
+      apt:
+        name={{ item }}
+        update_cache=yes
+        state=latest
+        force_apt_get=yes
+      loop: ['aptitude', 'apache2']
+
+# Settings Appache
+    - name: Enable rewrite module
+      shell: /usr/sbin/a2enmod rewrite
+      notify: Restart Apache
+
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted

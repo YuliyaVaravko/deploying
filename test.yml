@@ -7,9 +7,7 @@
       update_cache: yes
       state: latest
       name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
+      - docker
   - name: Log into private registry and force re-authorization
     docker_login:
       registry: docker.io/varavkoyv/new

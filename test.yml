@@ -2,6 +2,10 @@
 - hosts: all
   become: true
   tasks:
+  - name: Log into DockerHub
+    docker_login:
+      username: varavkoyv
+      password: dckr_pat_1ec_MrbpkTiEH_fFRtXjQvkhaco
   - name: 111
     apt:
       update_cache: yes

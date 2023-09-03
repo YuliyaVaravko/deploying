@@ -19,7 +19,9 @@
     pip:
       name: docker
 
-
+  - name: login to registry
+    shell: "docker login  -p dckr_pat_1ec_MrbpkTiEH_fFRtXjQvkhaco -u varavkoyv"
+  
   - name: start an image which is NOT present on the host yet but on the private regisrty
     docker:
       name: docker_pull_test

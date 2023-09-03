@@ -8,11 +8,7 @@
       state: latest
       name:
       - docker
-  - name: Log into private registry and force re-authorization
-    docker_login:
-      registry: docker.io/varavkoyv/new
-        username: varavkoyv
-        password: dckr_pat_1ec_MrbpkTiEH_fFRtXjQvkhaco
+
 
   - name: 111
     apt:
@@ -22,6 +18,11 @@
   - name: 222
     pip:
       name: docker
+  - name: Log into private registry and force re-authorization
+    docker_login:
+      registry: docker.io/varavkoyv/new
+      username: varavkoyv
+      password: dckr_pat_1ec_MrbpkTiEH_fFRtXjQvkhaco
   - name: Pull Flask app  image
     docker_image:
       name: varavkoyv/new

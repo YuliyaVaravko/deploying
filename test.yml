@@ -2,12 +2,15 @@
 - hosts: all
   become: true
   tasks:
-  - name: Create fleuntd services
-    docker_compose:
-      project_src: /root/
-    become: true
-    vars:
-      ansible_python_interpreter: /bin/python
+##### setup ansible <---> docker
+
+  - apt:
+      update_cache: yes
+      state: latest
+      name: python3-pip
+
+- pip:
+    name: docker
   - name: Pull Flask app  image
     docker_image:
       name: varavkoyv/new

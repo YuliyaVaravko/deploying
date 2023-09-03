@@ -23,9 +23,8 @@
   - name: start an image which is NOT present on the host yet but on the private regisrty
     docker:
       name: docker_pull_test
-      registry: "varavkoyv/new"
-      username: "varavkoyv"
-      password: "dckr_pat_1ec_MrbpkTiEH_fFRtXjQvkhaco"
-      image: varavko/new:latest
-      state: present    
-
+        registry: "varavkoyv/new"
+        username: "varavkoyv"
+        password: "dckr_pat_1ec_MrbpkTiEH_fFRtXjQvkhaco"
+        image: varavko/new:latest
+        state: present    

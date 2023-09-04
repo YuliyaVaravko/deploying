@@ -3,7 +3,7 @@
   become: true
   vars:
     default_container_name: result_test_system
-    default_container_image: varavkoyv/new:140
+    default_container_image: varavkoyv/new:latest
   tasks:   
     - name: Install aptitude
       apt:

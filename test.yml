@@ -4,7 +4,7 @@
   vars:
     container_count: 4
     default_container_name: new
-    default_container_image: varavkoyv/new:101
+    default_container_image: varavkoyv/new:104
 
   tasks:
     - name: Install aptitude
@@ -56,4 +56,5 @@
         name: "{{ default_container_name }}"
         image: "{{ default_container_image }}"
         state: started
+        ports: "81:80"
      

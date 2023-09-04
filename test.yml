@@ -13,8 +13,9 @@
         mode: '0777'
         
     - name: Execute script
-      script: /tmp/script.sh
-        remote_src: yes
+      script: 
+        cmd: /tmp/script.sh
+
      
     - name: Install aptitude
       apt:

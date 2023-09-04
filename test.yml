@@ -4,7 +4,7 @@
   vars:
     container_count: 4
     default_container_name: new
-    default_container_image: varavkoyv/new:66
+    default_container_image: varavkoyv/new:$BUILD_NUMBER
 
   tasks:
     - name: Install aptitude

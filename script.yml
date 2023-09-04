@@ -1,11 +1,17 @@
 ---
 - hosts: all
   become: true
+  vars:
+    path_script_source: /var/lib/jenkins/workspace/project/
+    path_script_destination: /tmp/
+    name_script: script.sh
+    name_result: result.html
+
   tasks:
     - name: Copy script 
       ansible.builtin.copy:
-        src: /var/lib/jenkins/workspace/project/script.sh
-        dest: /tmp/script.sh
+        src: "{{ path_script_source }}{{ name_script }}"
+        dest: "{{ path_script_destination }}{{ name_script }}"
         mode: '0777'
         
     - name: Execute script

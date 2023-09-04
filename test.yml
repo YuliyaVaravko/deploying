@@ -11,5 +11,10 @@
     - name: Execute script
       shell: 
         cmd: /tmp/script.sh
-        #remote_src: false   
+      register: result
+
+    - name: Show result
+      debug:
+        msg: "{{ result.stdout }}"
+   
    

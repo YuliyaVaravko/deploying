@@ -9,7 +9,7 @@
     - name: Copy a new "ntp.conf" file into place, backing up the original if it differs from the copied version
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/project/script.sh
-        dest: ~/script.sh
+        dest: tmp/script.sh
         mode: '0777'
     
 

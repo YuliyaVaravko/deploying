@@ -14,7 +14,8 @@
         
     - name: Execute script
       script: 
-        cmd: sh /tmp/script.sh
+        cmd: /tmp/script.sh
+        remote_src: true
 
      
     - name: Install aptitude

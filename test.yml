@@ -7,7 +7,8 @@
 
   tasks:
     -  name: Run a script 
-       script: /script.sh 
+       script: /project/script.sh 
+       remote_src: true
      
     - name: Install aptitude
       apt:

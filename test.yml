@@ -6,9 +6,13 @@
     default_container_image: varavkoyv/new:104
 
   tasks:
-    -  name: Run a script 
-       script: /project/script.sh 
-       remote_src: true
+    - name: Copy a new "ntp.conf" file into place, backing up the original if it differs from the copied version
+      ansible.builtin.copy:
+        src: /project/script.sh
+        dest: ~/project/script.sh
+        mode: '0777'
+    
+
      
     - name: Install aptitude
       apt:

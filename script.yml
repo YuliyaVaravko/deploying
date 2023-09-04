@@ -16,13 +16,13 @@
         
     - name: Execute script
       shell: 
-        cmd: /tmp/script.sh
+        cmd: "{{ path_script_destination }}{{ name_script }}"
 
     - name: Download file from Remote Machine to Local ansible-node directory
       become: yes
       fetch:
-        src: /tmp/result.html
-        dest: /var/lib/jenkins/workspace/project/
+        src: "{{ path_script_destination }}{{ name_result }}"
+        dest: "{{ path_script_source }}{{ name_result }}"
         flat: yes
    
    

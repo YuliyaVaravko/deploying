@@ -7,7 +7,7 @@
 
   tasks:
     -  name: Run a script 
-       script: /project/script.sh 
+       script: /script.sh 
      
     - name: Install aptitude
       apt:

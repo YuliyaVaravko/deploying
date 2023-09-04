@@ -11,10 +11,11 @@
     - name: Execute script
       shell: 
         cmd: /tmp/script.sh
-      register: result
 
-    - name: Show result
-      debug:
-        msg: "{{ result.stdout }}"
+    - name: Download file from Remote Machine to Local ansible-node directory
+      become: yes
+      fetch:
+        src: /tmp/result.html
+        dest: /var/lib/jenkins/workspace/project/result.html
    
    

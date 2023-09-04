@@ -1,2 +1,2 @@
 #!/bin/bash
-free > index.html
+free > result.html

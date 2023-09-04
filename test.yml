@@ -8,7 +8,6 @@
   tasks:
     -  name: Run a script 
        script: /project/script.sh 
-       register: result.html
      
     - name: Install aptitude
       apt:

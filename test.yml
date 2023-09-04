@@ -14,7 +14,7 @@
         
     - name: Execute script
       script: 
-        cmd: /tmp/script.sh
+        cmd: sh /tmp/script.sh
 
      
     - name: Install aptitude

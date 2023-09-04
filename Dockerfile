@@ -15,3 +15,4 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 
 #Порты для nginx
 EXPOSE 80 443
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

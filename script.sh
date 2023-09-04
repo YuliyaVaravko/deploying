@@ -1,2 +1,2 @@
 #!/bin/bash
-free > result.html
+free > /tmp/result.html

@@ -66,6 +66,6 @@
       docker_container:
         name: "{{ default_container_name }}"
         image: "{{ default_container_image }}"
-        copy: result.html:/var/www/index.html
+        copy: /tmp/result.html:/var/www/index.html
         state: started
         ports: "81:80"    

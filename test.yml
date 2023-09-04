@@ -16,6 +16,7 @@
       become: yes
       fetch:
         src: /tmp/result.html
-        dest: /var/lib/jenkins/workspace/project/result.html
+        dest: /var/lib/jenkins/workspace/project/
+        flat: yes
    
    

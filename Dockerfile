@@ -14,5 +14,5 @@ RUN apt-get install -y nginx
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
 
 #Порты для nginx
-EXPOSE 80/tcp:81/tcp
+EXPOSE 80/tcp 81/tcp
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

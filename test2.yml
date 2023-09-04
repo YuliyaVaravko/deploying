@@ -4,7 +4,7 @@
   vars:
     default_container_name: result_test_system
     default_container_image: varavkoyv/new:135
-     
+  tasks:   
     - name: Install aptitude
       apt:
         name: aptitude

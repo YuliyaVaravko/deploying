@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Ansible for docker') {
             steps {
-                ansiblePlaybook playbook: 'ansible/docker.yml', inventory: 'ansible/inventory', credentialsId: 'ansible/ansible', extras: '-e JENKINS_BUILD_NUMBER=$BUILD_NUMBER'
+                ansiblePlaybook playbook: 'ansible/docker.yml', inventory: 'ansible/inventory', credentialsId: 'ansible', extras: '-e JENKINS_BUILD_NUMBER=$BUILD_NUMBER'
             }
         }
     }

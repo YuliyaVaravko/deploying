@@ -11,6 +11,6 @@ Total amount of swap: $(free -m | awk 'NR==4 {print $2}') </br>
 TSystem uptime: $(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }') </br></br>
 
 
-<h2> Measurement of read and write speed. <h2>" > /tmp/result.html
-sudo apt install hdparm
-sudo hdparm -tT /dev/sda >> /tmp/result.html
+#<h2> Measurement of read and write speed. <h2>" > /tmp/result.html
+#sudo apt install hdparm
+#sudo hdparm -tT /dev/sda >> /tmp/result.html

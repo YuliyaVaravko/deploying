@@ -18,9 +18,12 @@ pipeline {
         stage('check Dockerfile') {
             steps{
                 script{
-                    if(md5sum(./docker/Dockerfile) == md5sum(previousDockerfile)){
+                    cs1 = sh (script: "md5sum(./docker/Dockerfile)", returnStdout: true).trim()
+                    cs2 = sh (script: "md5sum(previousDockerfile)", returnStdout: true).trim()
+                    
+                    if (cs1 ==cs2){
                         echo "Hello"
-                    }       
+                    } else { echo "nonono"}      
                 }
             }
         }

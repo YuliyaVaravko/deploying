@@ -17,11 +17,12 @@ pipeline {
 
         stage('check Dockerfile') {
             steps{
-                script: 
-                    if(./docker/Dockerfile == previousDockerfile){
+                script{
+                    if(md5sum(./docker/Dockerfile) == md5sum(previousDockerfile)){
                         echo "Hello"
                     }       
                 }
+            }
         }
 
         stage('Ansible for script') {

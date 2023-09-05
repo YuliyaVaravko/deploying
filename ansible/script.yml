@@ -2,8 +2,8 @@
 - hosts: all
   become: true
   vars:
-    path_script_source: /var/lib/jenkins/workspace/project/ansible
-    loc_path_script_destination: /var/lib/jenkins/workspace/project/docker
+    path_script_source: /var/lib/jenkins/workspace/project/ansible/
+    loc_path_script_destination: /var/lib/jenkins/workspace/project/docker/
     remote_path_script_destination: /tmp/
     name_script: script.sh
     name_result: result.html

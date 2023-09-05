@@ -3,7 +3,7 @@ pipeline {
         registry = "varavkoyv/deploying"
         registryCredential = 'docker_hub'
         dockerImage = ''
-        previousDockerfile = ~/previousDockerfile
+        previousDockerfile = '~/previousDockerfile'
     }
     agent any
     stages {

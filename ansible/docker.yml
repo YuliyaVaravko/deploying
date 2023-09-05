@@ -60,5 +60,5 @@
         ports: "81:80"
         mounts:
           - type: bind 
-            source: {{ path_mount_source }}
-            target: {{ path_mount_destination }}
+            source: "{{ path_mount_source }}"
+            target: "{{ path_mount_destination }}"

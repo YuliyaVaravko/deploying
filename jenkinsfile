@@ -22,11 +22,12 @@ pipeline {
         
         stage('Build & push docker image') {
             steps{
-                #chdir {/docker}
-                script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
+                dir ('docker/'){
+                    script {
+                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                        docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                        }
                     }
                 }
             }

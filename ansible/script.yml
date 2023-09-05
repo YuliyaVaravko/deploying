@@ -19,9 +19,9 @@
       shell: 
         cmd: "{{ remote_path_script_destination }}{{ name_script }}"
 
-    - name: Download file from Remote Machine to Local ansible-node directory
-      become: yes
-      fetch:
-        src: "{{ remote_path_script_destination }}{{ name_result }}"
-        dest: "{{ path_script_source }}{{ name_result }}"
-        flat: yes
+#    - name: Download file from Remote Machine to Local ansible-node directory
+#      become: yes
+#      fetch:
+#        src: "{{ remote_path_script_destination }}{{ name_result }}"
+#        dest: "{{ path_script_source }}{{ name_result }}"
+#        flat: yes

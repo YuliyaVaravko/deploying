@@ -10,13 +10,15 @@ pipeline {
             steps{
                 git branch: 'main',
                      credentialsId: '96959a30-0a0a-439a-97c9-a23be67c7ac9', 
-                     url: 'git@github.com:YuliyaVaravko/project.git/'        
+                     url: 'git@github.com:YuliyaVaravko/deploying.git'        
                 }
         }
         
         stage('Ansible for script') {
             steps {
-                ansiblePlaybook playbook: 'ansible/script.yml', inventory: 'ansible/inventory', credentialsId: 'ansible'
+                dir('ansible/'){
+                    ansiblePlaybook playbook: 'script.yml', inventory: 'inventory', credentialsId: 'ansible'
+                }
             }
         }
         
@@ -34,7 +36,9 @@ pipeline {
         }
         stage('Ansible for docker') {
             steps {
-                ansiblePlaybook playbook: 'ansible/docker.yml', inventory: 'ansible/inventory', credentialsId: 'ansible', extras: '-e JENKINS_BUILD_NUMBER=$BUILD_NUMBER'
+                dir('ansible/'){
+                    ansiblePlaybook playbook: 'docker.yml', inventory: 'inventory', credentialsId: 'ansible', extras: '-e JENKINS_BUILD_NUMBER=$BUILD_NUMBER'
+                }
             }
         }
     }

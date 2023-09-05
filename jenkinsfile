@@ -21,7 +21,7 @@ pipeline {
                     hash=sudo md5sum /var/lib/jenkins/workspace/deploying/docker/Dockerfile
                     if $hash==$hash_previous
                     echo "hello"
-                    fi
+                    then echo "no"
                  ''')
             }
         }

@@ -22,7 +22,7 @@ pipeline {
         
         stage('Build & push docker image') {
             steps{
-                chdir {/docker}
+                #chdir {/docker}
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     docker.withRegistry( '', registryCredential ) {

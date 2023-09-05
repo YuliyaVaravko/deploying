@@ -1,8 +1,8 @@
 pipeline {
     environment {
         registry = "varavkoyv/deploying"
-        registryCredential = 'docker_hub'
-        dockerImage = ''
+        registryCredential = "docker_hub"
+        dockerImage = ""
     }
     agent any
     stages {
@@ -18,7 +18,7 @@ pipeline {
             steps{
                 script{
                     cs1 = sh(script: "md5sum(./docker/Dockerfile)", returnStdout: true).trim()
-                    cs2 = sh(script: "md5sum(~/previousDockerfile)", returnStdout: true).trim()
+                    cs2 = sh(script: "md5sum(/home/user/previousDockerfile)", returnStdout: true).trim()
                     
                     if (cs1 == cs2){
                         echo "Hello"

@@ -3,6 +3,7 @@ pipeline {
         registry = "varavkoyv/deploying"
         registryCredential = "docker_hub"
         dockerImage = ""
+        cheking = false
     }
     agent any
     stages {
@@ -20,19 +21,13 @@ pipeline {
                     hash_previous=sudo md5sum /var/lib/jenkins/workspace/deploying/previos_dockerfile
                     hash=sudo md5sum /var/lib/jenkins/workspace/deploying/docker/Dockerfile
                     if [ $hash -eq $hash_previous ]
-                    then echo "hello"
+                    then cheking=true
                     fi
                  ''')
             }
         }
 
-        stage('Ansible for script') {
-            steps {
-                dir('ansible/'){
-                    ansiblePlaybook playbook: 'script.yml', inventory: 'inventory', credentialsId: 'ansible'
-                }
-            }
-        }
+
         
         stage('Build & push docker image') {
             steps{
@@ -43,6 +38,14 @@ pipeline {
                             dockerImage.push()
                         }
                     }
+                }
+            }
+        }
+
+        stage('Ansible for script') {
+            steps {
+                dir('ansible/'){
+                    ansiblePlaybook playbook: 'script.yml', inventory: 'inventory', credentialsId: 'ansible'
                 }
             }
         }

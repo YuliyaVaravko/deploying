@@ -3,7 +3,7 @@
   become: true
   vars:
     path_script_source: /var/lib/jenkins/workspace/deploying/ansible/
-    loc_path_script_destination: /var/lib/jenkins/workspace/deploying/docker/
+    #loc_path_script_destination: /var/lib/jenkins/workspace/deploying/docker/
     remote_path_script_destination: /tmp/
     name_script: script.sh
     name_result: result.html
@@ -23,5 +23,5 @@
       become: yes
       fetch:
         src: "{{ remote_path_script_destination }}{{ name_result }}"
-        dest: "{{ loc_path_script_destination }}{{ name_result }}"
+        dest: "{{ path_script_source }}{{ name_result }}"
         flat: yes

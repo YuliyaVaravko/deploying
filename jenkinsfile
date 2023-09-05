@@ -16,13 +16,14 @@ pipeline {
 
         stage('check Dockerfile') {
             steps{
-                    cs1 = sh (script: "(md5sum(./docker/Dockerfile))")
-                    cs2 = sh (script: "(md5sum(/home/user/previousDockerfile))")
-                    
-                    if (cs1 == cs2){
-                        echo "Hello"
-                    } else { echo "nonono"}      
-                            }
+                sh(script: ''' #!/bin/bash
+                    hash_previous=md5sum /var/lib/jenkins/workspace/deploying/previos_dockerfile
+                    hash=md5sum /var/lib/jenkins/workspace/deploying/docker/Dockerfile
+                    if $hash==$hash_previous
+                    echo "hello"
+                    fi
+                 ''')
+            }
         }
 
         stage('Ansible for script') {

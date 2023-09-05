@@ -1,0 +1,39 @@
+pipeline {
+    environment {
+        registry = "varavkoyv/new"
+        registryCredential = 'docker_hub'
+        dockerImage = ''
+    }
+    agent any
+    stages {
+        stage('git_clone') {
+            steps{
+                git branch: 'main',
+                     credentialsId: '96959a30-0a0a-439a-97c9-a23be67c7ac9', 
+                     url: 'git@github.com:YuliyaVaravko/project.git/'        
+                }
+        }
+        
+        stage('Ansible for script') {
+            steps {
+                ansiblePlaybook playbook: 'script.yml', inventory: 'inventory', credentialsId: 'ansible'
+            }
+        }
+        
+        stage('Build & push docker image') {
+            steps{
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('Ansible for docker') {
+            steps {
+                ansiblePlaybook playbook: 'docker.yml', inventory: 'inventory', credentialsId: 'ansible', extras: '-e JENKINS_BUILD_NUMBER=$BUILD_NUMBER'
+            }
+        }
+    }
+}

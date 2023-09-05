@@ -3,6 +3,7 @@ pipeline {
         registry = "varavkoyv/deploying"
         registryCredential = 'docker_hub'
         dockerImage = ''
+        previousDockerfile = ~/previousDockerfile
     }
     agent any
     stages {
@@ -13,7 +14,16 @@ pipeline {
                      url: 'git@github.com:YuliyaVaravko/deploying.git'        
                 }
         }
-        
+
+        stage('check Dockerfile') {
+            steps{
+                script: 
+                    if(./docker/Dockerfile == previousDockerfile){
+                        echo "Hello"
+                    }       
+                }
+        }
+
         stage('Ansible for script') {
             steps {
                 dir('ansible/'){

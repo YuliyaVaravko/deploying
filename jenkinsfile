@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "varavkoyv/new"
+        registry = "varavkoyv/deploying"
         registryCredential = 'docker_hub'
         dockerImage = ''
     }

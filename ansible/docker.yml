@@ -4,6 +4,9 @@
   vars:
     default_container_name: result_test_system
     default_container_image: varavkoyv/deploying:{{ JENKINS_BUILD_NUMBER }}
+    path_mount_source: /var/lib/jenkins/workspace/deploying/ansible/result.html
+    path_mount_destination: var/www/html/index.html
+
   tasks:   
     - name: Install aptitude
       apt:
@@ -57,5 +60,5 @@
         ports: "81:80"
         mounts:
           - type: bind 
-            source: result.html 
-            target: /var/www/html/index.html
+            source: {{ path_mount_source }}
+            target: {{ path_mount_destination }}

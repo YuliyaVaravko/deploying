@@ -19,7 +19,7 @@ pipeline {
                 sh(script: ''' #!/bin/bash
                     hash_previous=sudo md5sum /var/lib/jenkins/workspace/deploying/previos_dockerfile
                     hash=sudo md5sum /var/lib/jenkins/workspace/deploying/docker/Dockerfile
-                    if $hash -eq $hash_previous
+                    if [ $hash -eq $hash_previous ]
                     then echo "hello"
                     fi
                  ''')

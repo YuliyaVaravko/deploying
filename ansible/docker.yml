@@ -3,8 +3,8 @@
   become: true
   vars:
     default_container_name: result_test_system
-    #default_container_image: varavkoyv/deploying:{{ JENKINS_BUILD_NUMBER }}
-    default_container_image: varavkoyv/deploying:latest
+    default_container_image: varavkoyv/deploying:{{ JENKINS_BUILD_NUMBER }}
+    #default_container_image: varavkoyv/deploying:latest
     path_mount_source: /tmp/result.html
     path_mount_destination: /var/www/html/index.html
 

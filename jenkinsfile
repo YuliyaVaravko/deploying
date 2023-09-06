@@ -9,7 +9,13 @@ pipeline {
     }
     agent any
     stages {
-
+        stage('Git_clone') {
+            steps{
+                git branch: 'main',
+                     credentialsId: '96959a30-0a0a-439a-97c9-a23be67c7ac9', 
+                     url: 'git@github.com:YuliyaVaravko/deploying.git'        
+                }
+        }
         stage('check') {
             steps {
                 script {
@@ -24,5 +30,3 @@ pipeline {
                 }
             }
         }    
-
-

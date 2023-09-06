@@ -4,7 +4,7 @@ pipeline {
         registryCredential = "docker_hub"
         dockerImage = ""
         path_previos_file = "/var/lib/jenkins/workspace/deploying/previos_dockerfile"
-        path_file = "/var/lib/jenkins/workspace/deploying/docker/Dockerfile"
+        path_file = "$WORKSPACE_TMP/docker/Dockerfile"
 
     }
     agent any

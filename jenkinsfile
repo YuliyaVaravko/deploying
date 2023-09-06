@@ -4,7 +4,7 @@ pipeline {
         registryCredential = "docker_hub"
         dockerImage = ""
         path_previos_file = "${WORKSPACE}/previos_dockerfile"
-        path_file = "${WORKSPACE}docker/Dockerfile"
+        path_file = "${WORKSPACE}/docker/Dockerfile"
         cheking = false
     }
     agent any

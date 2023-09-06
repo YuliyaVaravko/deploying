@@ -22,7 +22,7 @@ pipeline {
                 sh(script: ''' #!/bin/bash
                     hash_previous=sudo md5sum $path_previos_file
                     hash=sudo md5sum $path_file
-                    if [ $hash == $hash_previous ]
+                    if [ $hash == $hash_previous ];
                     then cheking="true"
                     fi
                 ''')

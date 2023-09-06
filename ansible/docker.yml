@@ -9,12 +9,14 @@
     path_mount_destination: /var/www/html/index.html
 
   tasks:   
+  # Install tool for interfacing with the Linux package manager
     - name: Install aptitude
       apt:
         name: aptitude
         state: latest
         update_cache: true
 
+  # Install the required system packages
     - name: Install required system packages
       apt:
         pkg:
@@ -27,32 +29,38 @@
           - python3-setuptools
         state: latest
         update_cache: true
-
+  
+  # The Docker GPG key is added to verify the download,
     - name: Add Docker GPG apt Key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
-
+  
+  # The official repository is added as a new package source
     - name: Add Docker Repository
       apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu focal stable
         state: present
 
+  # Install Docker 
     - name: Update apt and install docker-ce
       apt:
         name: docker-ce
         state: latest
         update_cache: true
-
+ 
+  # Install additional Docker module for Python
     - name: Install Docker Module for Python
       pip:
         name: docker
 
-    - name: Pull Docker image
+  # Pulling Docker image from dockerhim repo
+   - name: Pull Docker image
       docker_image:
         name: "{{ default_container_image }}"
         source: pull
-
+   
+  # Create and configure (ports, mount, etc) container using the pulled image
     - name: Create Docker container
       docker_container:
         name: "{{ default_container_name }}"

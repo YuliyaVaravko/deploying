@@ -26,6 +26,7 @@ pipeline {
                     else
                     echo "change"
                     checking=true
+                    echo "$checking"
                     fi
                 ''')
             }

@@ -3,6 +3,8 @@ pipeline {
         registry = "varavkoyv/deploying"
         registryCredential = "docker_hub"
         dockerImage = ""
+        path_previous_file = "/var/lib/jenkins/workspace/deploying/previous_docker/Dockerfile"
+        path_file = "/var/lib/jenkins/workspace/deploying/docker/Dockerfile"
     }
     agent any
     stages {
@@ -14,18 +16,42 @@ pipeline {
                 }
             }
 
-        stage('Build & push docker image') {
-            steps{ 
-                dir('docker/'){
-                    script {
-                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                        docker.withRegistry( '', registryCredential ) {
-                            dockerImage.push()
+        stage('Build & push docker image, if needed'){
+            steps{                
+                script{
+                    def output = sh (returnStdout: true, script: '''#!/bin/bash
+
+                        s1=$(md5sum "$path_previous_file"| awk '{print$1}')
+                        s2=$(md5sum "$path_file"| awk '{print$1}')
+                        function check() {
+                          if [[ "$s1" == "$s2" ]]; then
+                             return  1
+                          fi
                         }
+                        result=$(check) 
+                          if [[ $? -eq 1 ]]; then
+                             echo "true"
+                             else 
+                             echo "false"
+                          fi
+                        ''').trim()
+                    echo "$output"
+                    if ("$output" == "false"){
+                        dir('docker/'){
+                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                            docker.withRegistry( '', registryCredential ) {
+                                dockerImage.push()
+                            }
+                        }
+                        sh (script: ''' #!/bin/bash
+                            sudo cp $path_file $path_previous_file''')
                     }
+                    else
+                    echo "DockerFile hasn't been changed, task is skipped"
                 }
             }
         }
+
 
         stage('Ansible for script') {
             steps {

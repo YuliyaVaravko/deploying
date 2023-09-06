@@ -20,8 +20,8 @@ pipeline {
         stage('check Dockerfile') {
             steps{
                 sh(script: ''' #!/bin/bash
-                    hash_previous=sudo md5sum $path_previos_file
-                    hash=sudo md5sum $path_file
+                    sudo md5sum $path_previos_file > hash_previous
+                    sudo md5sum $path_file > hash
                     if [[ $hash == $hash_previous ]]
                     then cheking="true"
                     fi

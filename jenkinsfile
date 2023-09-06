@@ -21,10 +21,9 @@ pipeline {
             steps{
                 sh(script: ''' #!/bin/bash
                     if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
-                    return 1
+                    return 0
                     else
-                    echo "1" > /var/lib/jenkins/workspace/deploying/check
-                    return 0                   
+                    return 1                   
                     fi
                 ''')
             }

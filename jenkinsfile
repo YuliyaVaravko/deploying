@@ -19,7 +19,7 @@ pipeline {
 
         stage('check') {
             steps{
-                 check=sh(script: ''' #!/bin/bash $(diff -q $path_previos_file  $path_file)'''
+                 check=sh(script: ''' #!/bin/bash $(diff -q $path_previos_file  $path_file)''')
                         
                 }
         }

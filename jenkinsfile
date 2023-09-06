@@ -43,7 +43,7 @@ pipeline {
                         }
                     }
                     sh (script: ''' #!/bin/bash
-                        cp $path_file $path_previos_file'''
+                        sudo cp $path_file $path_previos_file'''
                     )
                 }
             }

@@ -19,16 +19,58 @@ pipeline {
         stage('check') {
             steps {
                 script {
-                    v = sh(returnStdout: true, script: ''' #!/bin/bash
+                  sh(returnStdout: true, script: ''' #!/bin/bash
                         if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
                         return 1
                         else
                         return 0                   
                         fi
-                        ''').trim()
-                    echo "${v}"
+                        ''')
+                    echo $?
                 }
             }
         }    
+
+
+        stage('Build & push docker image') {
+            when{expression{sh(script: ''' #!/bin/bash
+                    if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
+                    return=1
+                    else
+                    return=0                   
+                    fi
+                ''') == 1
+                }
+            }
+                steps{ 
+                    dir('docker/'){
+                    script {
+                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                        docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                        }
+                    }
+                    sh (script: ''' #!/bin/bash
+                        sudo cp $path_file $path_previos_file'''
+                    )
+                }
+            }
+        }
+
+        stage('Ansible for script') {
+            steps {
+                dir('ansible/'){
+                    ansiblePlaybook playbook: 'script.yml', inventory: 'inventory', credentialsId: 'ansible'
+                }
+            }
+        }
+
+        stage('Ansible for docker') {
+            steps {
+                dir('ansible/'){
+                    ansiblePlaybook playbook: 'docker.yml', inventory: 'inventory', credentialsId: 'ansible', extras: '-e JENKINS_BUILD_NUMBER=$BUILD_NUMBER'
+                }
+            }
+        }
     }
 }

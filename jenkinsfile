@@ -24,7 +24,7 @@ pipeline {
                     else
                     return 0                   
                     fi
-                ''') == 0
+                ''') == 1
 }}
                 steps{ 
                     dir('docker/'){

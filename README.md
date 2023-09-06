@@ -6,7 +6,7 @@
 - **_Containerization_**: Docker
 - **_SCM_**: GIT
 - **_Web Server_**: NGINX
-- **_Languages_**: Bash (executable script), YAML (Ansible configuration), Groovy (jenkinsfile)
+- **_Languages_**: Bash (executable script), YAML (Ansible configuration), Groovy (Jenkinsfile)
 
 ## Detailed project information
 - script for collect information about the system (script.sh) has been developed

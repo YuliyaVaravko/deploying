@@ -9,12 +9,14 @@
     name_result: result.html
 
   tasks:
+  # Copy script to target host
     - name: Copy script 
       ansible.builtin.copy:
         src: "{{ path_script_source }}{{ name_script }}"
         dest: "{{ remote_path_script_destination }}{{ name_script }}"
         mode: '0777'
-        
+
+  # Execute script       
     - name: Execute script
       shell: 
         cmd: "{{ remote_path_script_destination }}{{ name_script }}"

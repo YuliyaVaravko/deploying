@@ -5,7 +5,7 @@ pipeline {
         dockerImage = ""
         path_previos_file = "${WORKSPACE}/previos_dockerfile"
         path_file = "${WORKSPACE}/docker/Dockerfile"
-        cheking = false
+        cheking = "false"
     }
     agent any
     stages {
@@ -23,7 +23,7 @@ pipeline {
                     hash_previous=sudo md5sum $path_previos_file
                     hash=sudo md5sum $path_file
                     if [ $hash == $hash_previous ]
-                    then $cheking = true
+                    then $cheking = "true"
                     fi
                 ''')
             }

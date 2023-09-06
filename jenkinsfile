@@ -18,9 +18,10 @@ pipeline {
         }
 
         stage('Build & push docker image') {
-            when{expression{!sh(script: ''' #!/bin/bash $(diff -q $path_previos_file  $path_file)''')
+            when{not{expression{!sh(script: ''' #!/bin/bash $(diff -q $path_previos_file  $path_file)''')
 }
             }
+}
                 steps{ 
                     dir('docker/'){
                     script {

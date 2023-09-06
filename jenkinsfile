@@ -5,7 +5,7 @@ pipeline {
         dockerImage = ""
         path_previos_file = "${WORKSPACE}/previos_dockerfile"
         path_file = "${WORKSPACE}/docker/Dockerfile"
-        checking = 1
+        checking = false
 
     }
     agent any
@@ -31,7 +31,7 @@ pipeline {
         }
       
         stage('Build & push docker image') {
-            when{expression{!cheking}}
+            when{expression{!checking}}
                 steps{ 
                     dir('docker/'){
                     script {

@@ -16,9 +16,9 @@ pipeline {
                      url: 'git@github.com:YuliyaVaravko/deploying.git'        
                 }
         }
-steps {
-    script {
-        String v = {sh(returnStdout: true, script: ''' #!/bin/bash
+            steps {
+                script {
+                        String v = {sh(returnStdout: true, script: ''' #!/bin/bash
                     if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
                     return 1
                     else
@@ -27,6 +27,7 @@ steps {
                 ''')
         print v
     }
+}
 }
 
         stage('Build & push docker image') {

@@ -16,24 +16,9 @@ pipeline {
                      url: 'git@github.com:YuliyaVaravko/deploying.git'        
                 }
         }
-        stage('check') {
-            steps {
-                script {
-                  sh(script: ''' #!/bin/bash
-                        if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
-                        echo $?
-                        else
-                        echo $?                 
-                        fi
-                        ''')
-                }
-            }
-        }    
-
 
         stage('Build & push docker image') {
-            when{expression{sh(script: ''' #!/bin/bash
-                        if [ -z "$(diff -q $path_previos_file  $path_file)" ]''')
+            when{expression{sh("$(diff -q $path_previos_file  $path_file)")
 }
             }
                 steps{ 

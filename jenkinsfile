@@ -39,6 +39,9 @@ pipeline {
                             dockerImage.push()
                         }
                     }
+                    sh (
+                        cp path_file path_previos_file
+                    )
                 }
             }
         }

@@ -20,8 +20,10 @@ pipeline {
         stage('Build & push docker image') {
             when{
                 expression{
-                    sh(script: ''' #!/bin/bash $(diff -q $path_previos_file  $path_file)''') 
-                     }
+                   sh(script: ''' #!/bin/bash $(cat $path_previos_file | md5sum -c --status <(cat $path_file | md5sum))''') 
+                     
+
+}
                 }
         
                 steps{ 

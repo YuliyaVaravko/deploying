@@ -5,7 +5,7 @@ pipeline {
         dockerImage = ""
         path_previos_file = "/var/lib/jenkins/workspace/deploying/previos_dockerfile"
         path_file = "${WORKSPACE}/docker/Dockerfile"
-        checking = false
+        checking = ""
 
     }
     agent any
@@ -23,6 +23,7 @@ pipeline {
                 sh(script: ''' #!/bin/bash
                     if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
                     echo "The same dockerfile"
+                    checking=false
                     else
                     echo "Dockerfile has been changed"
                     checking=true

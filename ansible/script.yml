@@ -3,7 +3,6 @@
   become: true
   vars:
     path_script_source: /var/lib/jenkins/workspace/deploying/ansible/
-    #loc_path_script_destination: /var/lib/jenkins/workspace/deploying/docker/
     remote_path_script_destination: /tmp/
     name_script: script.sh
     name_result: result.html
@@ -20,10 +19,3 @@
     - name: Execute script
       shell: 
         cmd: "{{ remote_path_script_destination }}{{ name_script }}"
-
-#    - name: Download file from Remote Machine to Local ansible-node directory
-#      become: yes
-#      fetch:
-#        src: "{{ remote_path_script_destination }}{{ name_result }}"
-#        dest: "{{ path_script_source }}{{ name_result }}"
-#        flat: yes

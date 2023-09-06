@@ -40,7 +40,7 @@ pipeline {
                         }
                     }
                     sh (
-                        cp path_file path_previos_file
+                        cp $path_file $path_previos_file
                     )
                 }
             }

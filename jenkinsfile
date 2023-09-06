@@ -21,12 +21,11 @@ pipeline {
                 script {
                   sh(script: ''' #!/bin/bash
                         if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
-                        return 1
+                        echo $?
                         else
-                        return 0                   
+                        echo $?                 
                         fi
                         ''')
-                    sh(echo "{$?}")
                 }
             }
         }    

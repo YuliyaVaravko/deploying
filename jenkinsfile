@@ -4,7 +4,7 @@ pipeline {
         registryCredential = "docker_hub"
         dockerImage = ""
         path_previos_file = "/var/lib/jenkins/workspace/deploying/previos_dockerfile"
-        path_file = "${WORKSPACE}/docker/Dockerfile"
+        path_file = "/var/lib/jenkins/workspace/deploying/docker/Dockerfile"
 
     }
     agent any
@@ -21,16 +21,16 @@ pipeline {
             steps{
                 sh(script: ''' #!/bin/bash
                     if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
-                    return 0
+                    return 1
                     else
-                    return 1                   
+                    return 0                   
                     fi
                 ''')
             }
         }
       
         stage('Build & push docker image') {
-            when{expression{'check Dockerfile'}}
+            when{expression{'check Dockerfile' == 0}}
                 steps{ 
                     dir('docker/'){
                     script {

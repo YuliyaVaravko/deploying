@@ -30,7 +30,7 @@ pipeline {
         }
       
         stage('Build & push docker image') {
-            when{expression{'check Dockerfile' == 0}}
+            when{expression{'check Dockerfile' == 1}}
                 steps{ 
                     dir('docker/'){
                     script {

@@ -22,11 +22,10 @@ pipeline {
             steps{
                 sh(script: ''' #!/bin/bash
                     if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
-                    echo "Одинаковые"
+                    echo "The same dockerfile"
                     else
-                    echo "change"
+                    echo "Dockerfile has been changed"
                     checking=true
-                    echo "$checking"
                     fi
                 ''')
             }

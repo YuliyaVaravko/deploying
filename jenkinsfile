@@ -34,7 +34,7 @@ pipeline {
         }
       
         stage('Build & push docker image') {
-            when{expression{checking== true}}
+            when{expression{checking == true}}
                 steps{ 
                     dir('docker/'){
                     script {

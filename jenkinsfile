@@ -9,67 +9,20 @@ pipeline {
     }
     agent any
     stages {
-        stage('Git_clone') {
-            steps{
-                git branch: 'main',
-                     credentialsId: '96959a30-0a0a-439a-97c9-a23be67c7ac9', 
-                     url: 'git@github.com:YuliyaVaravko/deploying.git'        
-                }
-        }
+
         stage('check') {
             steps {
                 script {
-                        String v = sh(returnStdout: true, script: ''' #!/bin/bash
-                    if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
-                    return 1
-                    else
-                    return 0                   
-                    fi
-                ''')
-        print v
-    }
-}
-}
-
-
-        stage('Build & push docker image') {
-            when{expression{sh(returnStdout: true, script: ''' #!/bin/bash
-                    if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
-                    return 1
-                    else
-                    return 0                   
-                    fi
-                ''') == 1
-}}
-                steps{ 
-                    dir('docker/'){
-                    script {
-                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                        docker.withRegistry( '', registryCredential ) {
-                            dockerImage.push()
-                        }
-                    }
-                    sh (script: ''' #!/bin/bash
-                        sudo cp $path_file $path_previos_file'''
-                    )
+                    v = sh(returnStdout: true, script: ''' #!/bin/bash
+                        if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
+                        return 1
+                        else
+                        return 0                   
+                        fi
+                        ''')
+                    print v
                 }
             }
-        }
+        }    
 
-        stage('Ansible for script') {
-            steps {
-                dir('ansible/'){
-                    ansiblePlaybook playbook: 'script.yml', inventory: 'inventory', credentialsId: 'ansible'
-                }
-            }
-        }
 
-        stage('Ansible for docker') {
-            steps {
-                dir('ansible/'){
-                    ansiblePlaybook playbook: 'docker.yml', inventory: 'inventory', credentialsId: 'ansible', extras: '-e JENKINS_BUILD_NUMBER=$BUILD_NUMBER'
-                }
-            }
-        }
-    }
-}

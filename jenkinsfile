@@ -3,7 +3,7 @@ pipeline {
         registry = "varavkoyv/deploying"
         registryCredential = "docker_hub"
         dockerImage = ""
-        path_previos_file = "/var/lib/jenkins/workspace/deploying/previos_dockerfile"
+        path_previos_file = "/var/lib/jenkins/workspace/deploying/previos_dockerfile/Dockerfile"
         path_file = "$WORKSPACE/docker/Dockerfile"
 
     }

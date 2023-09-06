@@ -30,7 +30,7 @@ pipeline {
     }
 }
 }
-}
+
 
         stage('Build & push docker image') {
             when{expression{sh(returnStdout: true, script: ''' #!/bin/bash

@@ -59,7 +59,7 @@
         name: "{{ default_container_image }}"
         source: pull
    
-  # Create and configure (ports, mount, etc) container using the pulled image
+  # Create and configure (ports, mounts) container using the pulled image
     - name: Create Docker container
       docker_container:
         name: "{{ default_container_name }}"

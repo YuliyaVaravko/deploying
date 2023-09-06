@@ -3,6 +3,8 @@ pipeline {
         registry = "varavkoyv/deploying"
         registryCredential = "docker_hub"
         dockerImage = ""
+        path_previos_file = "/var/lib/jenkins/workspace/deploying/previos_dockerfile"
+        path_file = "/var/lib/jenkins/workspace/deploying/docker/Dockerfile"
         cheking = false
     }
     agent any
@@ -18,8 +20,8 @@ pipeline {
         stage('check Dockerfile') {
             steps{
                 sh(script: ''' #!/bin/bash
-                    hash_previous=sudo md5sum /var/lib/jenkins/workspace/deploying/previos_dockerfile
-                    hash=sudo md5sum /var/lib/jenkins/workspace/deploying/docker/Dockerfile
+                    hash_previous=sudo md5sum path_previos_file
+                    hash=sudo md5sum path_file
                     if [ $hash -eq $hash_previous ]
                     then cheking=true
                     fi
@@ -48,7 +50,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Ansible for docker') {
             steps {
                 dir('ansible/'){

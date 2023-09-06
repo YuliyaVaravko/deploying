@@ -16,6 +16,7 @@ pipeline {
                      url: 'git@github.com:YuliyaVaravko/deploying.git'        
                 }
         }
+        stage('check') {
             steps {
                 script {
                         String v = {sh(returnStdout: true, script: ''' #!/bin/bash
@@ -27,6 +28,7 @@ pipeline {
                 ''')
         print v
     }
+}
 }
 }
 

@@ -31,10 +31,7 @@ pipeline {
         
         stage('Build & push docker image') {
             steps{ 
-                when {
-                  allOf {
-                    cheking == false
-                  }  
+                when { expression { return cheking == false } } 
                     dir('docker/'){
                     script {
                         dockerImage = docker.build registry + ":$BUILD_NUMBER"

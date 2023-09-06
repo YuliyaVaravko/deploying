@@ -22,17 +22,17 @@ pipeline {
                 def checking = "false"
                 sh(script: ''' #!/bin/bash
                     if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
-                    echo "The same dockerfile"
+                    return 1
                     else
                     echo "1" > /var/lib/jenkins/workspace/deploying/check
-                    env.checking="true"                    
+                    return 0                   
                     fi
                 ''')
             }
         }
       
         stage('Build & push docker image') {
-            when{expression{checking == true}}
+            when{expression{check Dockerfile}}
                 steps{ 
                     dir('docker/'){
                     script {

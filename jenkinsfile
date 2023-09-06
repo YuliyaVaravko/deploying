@@ -17,16 +17,8 @@ pipeline {
                 }
         }
 
-        stage('check') {
-            steps{
-                 check=sh(script: ''' #!/bin/bash $(diff -q $path_previos_file  $path_file)''')
-                        
-                }
-        }
-
-
         stage('Build & push docker image') {
-            when{not{expression{sh(script: ''' #!/bin/bash $(diff -q $path_previos_file  $path_file)''')
+            when{{expression{sh(script: ''' #!/bin/bash $(diff -q $path_previos_file  $path_file)''' == 1)
 }
             }
 }

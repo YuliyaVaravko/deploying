@@ -23,7 +23,7 @@ pipeline {
                     if [ -z "$(diff -q $path_previos_file  $path_file)" ]; then
                     echo "Одинаковые"
                     else
-                    echo "Они такие разные!"
+                    cheking = "true"
                     fi
                 ''')
             }

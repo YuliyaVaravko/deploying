@@ -25,8 +25,8 @@ pipeline {
                         else
                         return 0                   
                         fi
-                        ''')
-                    echo $?
+                        '''
+                    echo $?)
                 }
             }
         }    

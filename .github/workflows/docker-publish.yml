@@ -20,9 +20,9 @@ jobs:
         id: gen_tags
         run: |
           if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
-            TAGS='["user/image:latest","user/image:'${GITHUB_REF/refs\/tags\//}'"]'
+            TAGS='[${GITHUB_REF/refs\/tags\//}]'
           else
-            TAGS='["user/image:latest"]'
+            TAGS='"latest"'
           fi
           echo '::set-output name=tags::'$TAGS
       - name: Extract metadata (tags, labels) for Docker

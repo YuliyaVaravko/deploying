@@ -24,8 +24,7 @@ jobs:
           images: ${{ secrets.DOCKER_REPO_NAME }}
           tags: |
             latest
-            type=sha
-            $BUILD_NUMBER
+            ${{github.run_number}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3

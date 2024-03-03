@@ -30,6 +30,6 @@ jobs:
           file: ./docker/Dockerfile
           push: true
           tags:  |
-            ${{ secrets.DOCKER_REPO_NAME }}:$(date + %s)
+            ${{ secrets.DOCKER_REPO_NAME }}:$(date+%s)
             ${{ secrets.DOCKER_REPO_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}

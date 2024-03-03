@@ -24,7 +24,6 @@ jobs:
           else
             TAGS='"latest"'
           fi
-          echo '::set-output name=tags::'$TAGS
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5

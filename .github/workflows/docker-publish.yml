@@ -22,6 +22,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ secrets.DOCKER_REPO_NAME }}
+          tags: |
+            latest
+            type=sha
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
@@ -29,7 +32,5 @@ jobs:
           context: .
           file: ./docker/Dockerfile
           push: true
-          tags:  |
-            ${{ secrets.DOCKER_REPO_NAME }}:$BUILD_NUMBER
-            ${{ secrets.DOCKER_REPO_NAME }}:latest
+          tags:  ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

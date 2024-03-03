@@ -25,6 +25,7 @@ jobs:
           tags: |
             latest
             type=sha
+            $BUILD_NUMBER
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3

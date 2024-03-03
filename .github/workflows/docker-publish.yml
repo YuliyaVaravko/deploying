@@ -1,4 +1,4 @@
-name: MyCI
+name: Push Docker image to Docker Hub 
 on:
   push:
     branches: [ "main" ]

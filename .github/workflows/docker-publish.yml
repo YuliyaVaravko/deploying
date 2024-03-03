@@ -32,5 +32,5 @@ jobs:
           context: .
           file: ./docker/Dockerfile
           push: true
-          tags: $(date)
+          tags: ${{ env.DATE }}
           labels: ${{ steps.meta.outputs.labels }}

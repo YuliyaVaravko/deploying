@@ -22,9 +22,6 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ secrets.DOCKER_REPO_NAME }}
-          tags: |
-            type=ref,event=branch
-            type=sha
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3

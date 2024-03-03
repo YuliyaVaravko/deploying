@@ -32,5 +32,5 @@ jobs:
           context: .
           file: ./docker/Dockerfile
           push: true
-          tags: ${{ env.DATE }}
+          tags:  ${{ secrets.DOCKER_REPO_NAME }}:${{ env.DATE }} ${{ secrets.DOCKER_REPO_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}

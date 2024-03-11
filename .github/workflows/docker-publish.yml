@@ -2,19 +2,30 @@ name: Push Docker image to Docker Hub !!
 on:
   push:
     branches: [ "main" ]
-
 jobs:
   run_example_job:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    - name: print out example job
-      uses: appleboy/ssh-action@v0.1.10
+
+    - name: Run command on remote server
+      uses: D3rHase/ssh-command-action@v0.2.2
       with:
-        host: "192.168.1.133"
-        username: "lever"
-        key: ${{ HOST_SSH }}
-        port: "22"
-        command_timeout: 30m
-        script: | 
-          echo "Nice Job!!!"
+          host: ${{secrets.SSH_HOST}}
+          user: ${{secrets.SSH_USER}}
+          private_key: ${{secrets.SSH_PRIVATE_KEY}}
+          command: |
+            echo '--- START WORK ON REMOTE SERVER ---';
+            ls -al;
+            echo '--- GIT INFORMATION ---'
+            git co dev;
+            git pull;
+            echo '--- DOCKER OPERATIONS ---';
+            docker-compose down;
+            echo '--- LIST OF DOCKER CONTAINERS AFTER STOPING DOCKER CONTAINERS ---';
+            docker ps;
+            docker-compose --file docker-compose.prod.yml up -d;
+            docker system prune --all --force;
+            echo '--- LIST OF DOCKER CONTAINERS AFTER STARTING DOCKER CONTAINERS ---';
+            docker ps;
+

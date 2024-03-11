@@ -7,12 +7,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Install SSH Key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+    #- name: Install SSH Key
+      #uses: shimataro/ssh-key-action@v2
+     # with:
+        #key: ${{ secrets.SSH_PRIVATE_KEY }}
+       # known_hosts: ${{ secrets.KNOWN_HOSTS }}
    # - name: Adding Known Hosts
    #   run: ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-    - name: Deploy with rsync
-      run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" ./deploying/docker/docker-compose.yml ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/lever
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
+    #- name: Deploy with rsync
+      - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" ./deploying/docker/docker-compose.yml ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/lever

@@ -1,11 +1,11 @@
-name: Push Docker image to Docker Hub !
+name: Push Docker image to Docker Hub !1
 on:
   push:
     branches: [ "main" ]
 jobs:
   run_example_job:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    #timeout-minutes: 5
     steps:
 
     - name: Run command on remote server

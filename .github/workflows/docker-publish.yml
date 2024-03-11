@@ -1,31 +1,19 @@
-name: Push Docker image to Docker Hub !1
-on:
-  push:
-    branches: [ "main" ]
+name: remote ssh command
+on: [push]
 jobs:
-  run_example_job:
+
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    #timeout-minutes: 5
     steps:
+    - name: executing remote ssh commands using password
 
-    - name: Run command on remote server
-      uses: D3rHase/ssh-command-action@v0.2.2
+
+  # You may pin to the exact commit or the version.
+  # uses: invi5H/ssh-action@ece33b57060e562f8d17b6c20b715de95204bbf2
+    uses: invi5H/ssh-action@v1.0.0
       with:
-          host: ${{secrets.SSH_HOST}}
-          user: ${{secrets.SSH_USER}}
-          private_key: ${{secrets.SSH_PRIVATE_KEY}}
-          command: |
-            echo '--- START WORK ON REMOTE SERVER ---';
-            ls -al;
-            echo '--- GIT INFORMATION ---'
-            git co dev;
-            git pull;
-            echo '--- DOCKER OPERATIONS ---';
-            docker-compose down;
-            echo '--- LIST OF DOCKER CONTAINERS AFTER STOPING DOCKER CONTAINERS ---';
-            docker ps;
-            docker-compose --file docker-compose.prod.yml up -d;
-            docker system prune --all --force;
-            echo '--- LIST OF DOCKER CONTAINERS AFTER STARTING DOCKER CONTAINERS ---';
-            docker ps;
-
+        SSH_USER: {{ secret.SSH_USER }}
+        SSH_HOST: {{ secret.HOST }}
+        SSH_KEY: {{ secret.SSH_PRIVATE_KEY }}
+              

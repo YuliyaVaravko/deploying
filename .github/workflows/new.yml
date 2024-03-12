@@ -1,4 +1,4 @@
-name: Node CI
+name: new
 on:
   push:
     branches: [ "main" ]
@@ -16,6 +16,4 @@ jobs:
         # Name of the playbook in your workspace.
         playbookName: ./ansible/script.yaml
         # Name of the inventory file to use.
-        inventoryFile: ./ansible/inventory
-
-              
+        inventoryFile: ./ansible/inventory             

@@ -8,14 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@main
-      with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          
+     - uses: actions/checkout@v2
+     - run: set -eu
+     - run: mkdir "$HOME/.ssh"
+     - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
+     - run: chmod 600 "$HOME/.ssh/key"
+     # Deploy
+     - run: ssh -i $HOME/.ssh/key lever@192.168.1.133  

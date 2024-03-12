@@ -15,4 +15,4 @@ jobs:
         # Name of the playbook in your workspace.
         playbookName: ~/deploying/ansible/script.yml
         # Name of the inventory file to use.
-        inventoryFile: ~/deploying/ansible/inventory             
+        inventoryFile: ~/ansible/inventory             

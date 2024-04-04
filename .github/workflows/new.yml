@@ -14,5 +14,5 @@ jobs:
     - name: add env
       run:
         echo "NEXT_PUBLIC_API_URL=https://dev.lever.io/api/" >> $GITHUB_ENV
-        cat ${{ NEXT_PUBLIC_API_URL }}
+        cat $NEXT_PUBLIC_API_URL
         cat $GITHUB_ENV

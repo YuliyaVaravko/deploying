@@ -11,8 +11,11 @@ jobs:
   build_push:
     runs-on: ubuntu-latest
     steps:
-    - name: add env
-      run: |
-        echo "NEXT_PUBLIC_API_URL=https//dev.lever.io/api/" >> $GITHUB_ENV
-        cat ${{ github.NEXT_PUBLIC_API_URL }}
 
+     - name: Step 1
+       run: |
+          echo "action_state=yellow" >> $GITHUB_ENV
+          echo "State is: '${{ env.action_state }}'" # No output since same step
+     - name: Step 2
+       run: |
+          echo "State is: '${{ env.action_state }}'" # Output works

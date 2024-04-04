@@ -12,7 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: add env
-      run:
+      run: |
         echo "NEXT_PUBLIC_API_URL=https//dev.lever.io/api/" >> "$GITHUB_ENV"
-        cat "$NEXT_PUBLIC_API_URL"
-        cat $GITHUB_ENV
+    - name: add env w    
+      run: |
+        print "$NEXT_PUBLIC_API_URL"
+

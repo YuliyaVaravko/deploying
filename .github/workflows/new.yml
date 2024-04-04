@@ -19,4 +19,4 @@ jobs:
      - name: Step 2
        run: |
           echo "State is: '${{ env.action_state }}'" # Output works
-          cat ${{ env.action_state }}
+          ${{ env.action_state }}

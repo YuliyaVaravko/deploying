@@ -18,13 +18,11 @@ jobs:
           echo "State is: '${{ env.action_state }}'" # Output works
           ${{ env.action_state }}
 
-          ACTION_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          echo "Action URL: $ACTION_URL"
      - name: Notify Telegram on failure
        if: failure()
        run: |
           BRANCH_NAME=$(echo $GITHUB_REF | awk -F'/' '{print $3}')
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
           -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-          -d "text=GitHub Action failed for repository ${{ github.repository }} (commit ${{ github.sha }} on branch $BRANCH_NAME). $ACTION_URL" \
+          -d "text=GitHub Action failed for repository ${{ github.repository }} (commit ${{ github.sha }} on branch $BRANCH_NAME). ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
           -d "reply_to_message_id=${{ secrets.TOPIC_ID }}" 
